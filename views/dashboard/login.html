@@ -29,57 +29,10 @@
             </form>
         </div>
     </div>
-    
+
     <?php include "/views/public/js.html" ?>
-
-
-
     <script>
-        $(function() {
-            // $("#login-form").submit(function() { 
-            //     var userName = $("#userName").val();
-            //     var userPassword = $("#userPassword").val();
-            //     $.ajax({
-            //         url : "/api/login",
-            //         type : "post",
-            //         data : {
-            //             tc_name : userName,
-            //             tc_pass : userPassword
-            //         },
-            //         success : function(data) {
-            //             if (data.code == 200) {
-            //                 //将用户的头像以及用户名存储到cookie中 这样首页就可以使用
-            //                 //cookie同步用户信息
-            //                 $.cookie("userInfo",JSON.stringify(data.result),{ path: '/'});
-            //                 location.href = "/";
-            //             }
-            //         },
-            //         error : function() {
-            //             console.log("出错了");
-            //         }
-            //     })
-            //     return false;
-            //  })
-
-            $("#login-form").submit(function(){
-                $(this).ajaxSubmit({
-                    url : "/api/login",
-                    type : "post",
-                    success : function(data) {
-                        if (data.code == 200) {
-                            $.cookie("userInfo",JSON.stringify(data.result),{ path: '/' });
-                            location.href = "/";
-                        }
-                    },
-                    error : function() {
-                        console.log("出错了");
-                    }
-                });
-                return false;
-            })
-
-
-        })
+        require(["static/js/dashboard/login"]);
     </script>
 </body>
 </html>
