@@ -6,7 +6,8 @@ require.config({
 		"form" : "assets/jquery-form/jquery.form",
 		"template" : "assets/artTemplate/template",
 		"bootstrap" : "assets/bootstrap/js/bootstrap.min",
-		"util" : "static/js/util"
+		"util" : "static/js/util",
+		"nprogress" : "assets/nprogress/nprogress",
 	},
 	shim : {
 		"bootstrap" : {

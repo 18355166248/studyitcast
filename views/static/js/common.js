@@ -1,4 +1,24 @@
-define(["jquery","template","cookie"],function($,template){
+define(["jquery","template","nprogress","cookie"],function($,template,NProgress){
+	// nprogress  动态滚动条
+	NProgress.start();
+	NProgress.done();
+
+	// ajax全局事件绑定到document上
+	$(document).ajaxStart(function(){
+		// NProgress.start();
+		if ("/dashboard/login" != location.pathname) {
+			$("#loading").show();
+		}
+	})
+	$(document).ajaxStop(function(){
+		// NProgress.done();
+		if ("/dashboard/login" != location.pathname) {
+			setTimeout(function(){
+				$("#loading").hide();
+			},200);
+		}
+	})
+
 	$(function(){
 		if ("/dashboard/login" != location.pathname) {
 			// 判断 如果在非登录页没有sessid这个值 表示没登录 需要跳转到登录页
@@ -46,7 +66,7 @@ define(["jquery","template","cookie"],function($,template){
 		$("#teacherlist a").each(function(i,v) {
 			if($(v).attr("href") == location.pathname) {
 				$(v).addClass("active");
-				$(v).siblings().removeClass("active");
+				$(v).parent().parent().slideDown();
 			}
 		})
   })
