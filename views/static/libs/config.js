@@ -8,14 +8,18 @@ require.config({
 		"bootstrap" : "assets/bootstrap/js/bootstrap.min",
 		"util" : "static/js/util",
 		"datepiker" : "assets/bootstrap-datepicker/js/bootstrap-datepicker.min",
-		"datepicker.zh-CN" : "assets/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min",
+		"datepicker-CN" : "assets/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min",
+		"validate" : "assets/jquery-validate/jquery-validate.min"
 	},
 	shim : {
 		"bootstrap" : {
 			deps : ["jquery"]
 		},
-		"datepicker.zh-CN" : {
+		"datepicker-CN" : {
 			deps : ["datepiker"]
+		},
+		"validate" : {
+			deps : ["jquery"]
 		}
 	}
 })

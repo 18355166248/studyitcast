@@ -1,4 +1,4 @@
-define(["jquery","template","util","form","datepiker","datepicker.zh-CN"],function($,template,util){
+define(["jquery","template","util","form","datepiker","datepicker-CN","validate"],function($,template,util){
 	// 判断 如果地址栏传值 那么就是编辑 否则就是添加
 	if(util.getObject("id")) {
 		$.ajax({
@@ -13,10 +13,9 @@ define(["jquery","template","util","form","datepiker","datepicker.zh-CN"],functi
 					$("#teacheradd").html(html);
 					$('#datetimepicker').datepicker({
 					    format: 'yyyy-mm-dd',
-					    startDate : "-5d",
-					    endDate : "+5d",
 					    language : "zh-CN"
 					});
+					getVolidate();
 				}
 			}
 		})
@@ -27,26 +26,59 @@ define(["jquery","template","util","form","datepiker","datepicker.zh-CN"],functi
 			btnAdd : "添 加"
 		})
 		$("#teacheradd").html(html);
-	}
-	//   判断是编辑还是添加老师  保存讲师信息
-	$("#teacheradd").on("click","#teachersave",function(){
-		var url ;
-		if (util.getObject("id")) {
-			url = "/api/teacher/update";
-		} else {
-			url = "/api/teacher/add";
-		}
+		$('#datetimepicker').datepicker({
+		    format: 'yyyy-mm-dd',
+		    language : "zh-CN"
+		});
+		getVolidate();
 
-		$("#teacherform").ajaxSubmit({
-			url : url,
-			type : "post",
-			success : function(data) {
-				if (data.code == 200) {
-					location.href = "/teacher/list"
+	}
+
+
+	// volidate 封装一下
+	function getVolidate() {
+		$("#teacherform").validate({
+			sendForm : false,
+			onBlur : true,
+			valid : function() {
+				var url ;
+				if (util.getObject("id")) {
+					url = "/api/teacher/update";
+				} else {
+					url = "/api/teacher/add";
+				}
+
+				$("#teacherform").ajaxSubmit({
+					url : url,
+					type : "post",
+					success : function(data) {
+						if (data.code == 200) {
+							location.href = "/teacher/list"
+						}
+					}
+				})
+			},
+			eachValidField : function() {
+				this.parent().parent().removeClass("has-error").addClass('has-success');
+			},
+			eachInvalidField : function() {
+				this.parent().next().removeClass('hide');
+				this.parent().parent().removeClass("has-success").addClass('has-error');
+			},
+			description : {
+				"tcname" : {
+					required : "用户名不能为空!",
+					pattern : "请输入5-10个以字母开头,可带数字"
+				},
+				"tcpass" : {
+					required : "密码不能为空!",
+					pattern : "请输入字母+数字或特殊字符"
+				},
+				"tc_join_date" : {
+					required : "用户名不能为空!"
 				}
 			}
 		})
-		return false;
-	})
+	}
 	
 })
