@@ -13,7 +13,8 @@ define(["jquery","template","util","form","datepiker","datepicker-CN","validate"
 					$("#teacheradd").html(html);
 					$('#datetimepicker').datepicker({
 					    format: 'yyyy-mm-dd',
-					    language : "zh-CN"
+					    language : "zh-CN",
+					    autoclose: true
 					});
 					getVolidate();
 				}
@@ -28,7 +29,8 @@ define(["jquery","template","util","form","datepiker","datepicker-CN","validate"
 		$("#teacheradd").html(html);
 		$('#datetimepicker').datepicker({
 		    format: 'yyyy-mm-dd',
-		    language : "zh-CN"
+		    language : "zh-CN",
+		    todayHighlight: true
 		});
 		getVolidate();
 
@@ -39,6 +41,8 @@ define(["jquery","template","util","form","datepiker","datepicker-CN","validate"
 	function getVolidate() {
 		$("#teacherform").validate({
 			sendForm : false,
+			// onKeyup : true,
+			// onChange : true,
 			onBlur : true,
 			valid : function() {
 				var url ;
