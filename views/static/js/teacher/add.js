@@ -1,4 +1,4 @@
-define(["jquery","template","util","form"],function($,template,util){
+define(["jquery","template","util","form","datepiker","datepicker.zh-CN"],function($,template,util){
 	// 判断 如果地址栏传值 那么就是编辑 否则就是添加
 	if(util.getObject("id")) {
 		$.ajax({
@@ -11,6 +11,12 @@ define(["jquery","template","util","form"],function($,template,util){
 					data.result.btnAdd = "保存";
 					var html = template("teacheradd-tpl",data.result)
 					$("#teacheradd").html(html);
+					$('#datetimepicker').datepicker({
+					    format: 'yyyy-mm-dd',
+					    startDate : "-5d",
+					    endDate : "+5d",
+					    language : "zh-CN"
+					});
 				}
 			}
 		})
