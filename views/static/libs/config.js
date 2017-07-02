@@ -8,6 +8,7 @@ require.config({
 		"bootstrap" : "assets/bootstrap/js/bootstrap.min",
 		"util" : "static/js/util",
 		"nprogress" : "assets/nprogress/nprogress",
+		
 	},
 	shim : {
 		"bootstrap" : {
