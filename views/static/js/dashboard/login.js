@@ -6,7 +6,7 @@ define(["jquery","cookie","form"],function($){
               type : "post",
               success : function(data) {
                   if (data.code == 200) {
-                      $.cookie("userInfo",JSON.stringify(data.result),{ path: '/' });
+                      $.cookie("userInfo",JSON.stringify(data.result),{expires:2 , path: '/'});
                       location.href = "/";
                   }
               },

@@ -34,26 +34,29 @@
                 <div class="form-group">
                     <label for="" class="col-xs-3 control-label">姓名</label>
                     <div class="col-xs-4">
-                        <input type="text" name="tc_name" value="{{tc_name}}" class="form-control input-sm" placeholder="讲师名称">
+                        <input type="text" data-pattern="^[\u4e00-\u9fff\w]{5,10}$" data-required data-description="tcname" data-describedby="tcname" name="tc_name" value="{{tc_name}}" class="form-control input-sm" placeholder="讲师名称">
                     </div>
+                    <label id="tcname" style="color:red" class="control-label hide " for="inputError1">请求出错!</label>
                 </div>
                 {{if !tc_id}}
                 <div class="form-group">
                     <label for="" class="col-xs-3 control-label">密码</label>
                     <div class="col-xs-4">
-                        <input type="password" name="tc_pass" class="form-control input-sm">
+                        <input type="password"data-pattern="^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$" data-required data-description="tcpass" data-describedby="tcpass" name="tc_pass" class="form-control input-sm">
                     </div>
+                    <label id="tcpass" style="color:red" class="control-label hide" for="inputError1">请求出错!</label>
                 </div>
                 {{/if}}
                 <div class="form-group">
                     <label for="" class="col-xs-3 control-label">入职时间</label>
                     <div class="col-xs-4">
-                        <input type="text" name="tc_join_date" value="{{tc_join_date}}" class="form-control input-sm">
+                        <input type="text" data-required data-description="tc_join_date" data-describedby="tc_join_date" id="datetimepicker" name="tc_join_date" value="{{tc_join_date}}" class="form-control input-sm" readonly="readonly" >
                     </div>
+                    <label id="tc_join_date" style="color:red" class="control-label hide" for="inputError1">请求出错1</label>   
                 </div>
                 <div class="form-group">
                     <label for="" class="col-xs-3 control-label">类型</label>
-                    <div class="col-xs-2">
+                    <div class="col-xs-4">
                         <select name="tc_type" class="form-control input-sm">
                             <option {{if tc_type == 1}}selected{{/if}} value="1">讲师</option>
                             <option {{if tc_type == 0}}selected{{/if}}  value="0">管理员</option>
@@ -73,7 +76,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-7">
-                        <a href="/advert/list" id="teachersave" class="btn btn-success btn-sm pull-right" > {{btnAdd}} </a>
+                        <button id="teachersave" class="btn btn-success btn-sm pull-right" > {{btnAdd}} </button>
                     </div>                          
                 </div>
             </form>
