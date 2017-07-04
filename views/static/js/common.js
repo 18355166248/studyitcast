@@ -27,8 +27,8 @@ define(["jquery","template","nprogress","cookie"],function($,template,NProgress)
 			} else {
 				//  获取 cookie里面的数据 头像和姓名 渲染到左上角
 				var userInfo = JSON.parse($.cookie("userInfo"));
-		    var str = template("profile-tpl",userInfo);
-		    $("#avater").html(str);
+		    	var str = template("profile-tpl",userInfo);
+		    	$("#avater").html(str);
 			}
 		}
 
