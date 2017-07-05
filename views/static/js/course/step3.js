@@ -6,7 +6,7 @@ define(["jquery","template","util"],function($,template,util){
 		data : {cs_id : csid},
 		success : function(data){
 			if(data.code == 200) {
-				console.log(data);
+				// console.log(data);
 				var html = template("step3-tpl",data.result);
 				$(".steps").html(html);
 			}

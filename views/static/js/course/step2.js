@@ -39,7 +39,11 @@ define(["jquery","template","util","nprogress","uploadify","jcrop"],function($,t
 					onUploadSuccess : function(file,data,response) {
 						var data = JSON.parse(data);
 						$(".preview>img").attr("src",data.result.path);
-						
+						//判断 如果有jcrop插件 就移除插件
+						if(jcropApi) {
+							jcropApi.destroy();
+							$("#cut-img").text("裁切图片");
+						}
 					},
 					// 文件上传不管失败成功后都会触发
 					onUploadComplete : function() {
@@ -89,9 +93,6 @@ define(["jquery","template","util","nprogress","uploadify","jcrop"],function($,t
 								}
 							}
 						})
-						// $(this).text("裁切图片");
-						// console.log(jcropApi)
-						// jcropApi.animateTo([x,y,w,h]);
 					}
 					
 				})
