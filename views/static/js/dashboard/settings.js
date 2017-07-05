@@ -1,4 +1,4 @@
-define(["jquery","ckeditor","template","nprogress","region","datepiker","datepicker-CN","uploadify","form"],function($,CKEDITOR,template,NProgress){
+define(["jquery","ckeditor","template","nprogress","region","datepiker","datepicker-CN","uploadify","form","cookie"],function($,CKEDITOR,template,NProgress){
 	var avaterImg ;
     //页面需要渲染  发送ajax请求
    	$.ajax({
@@ -69,7 +69,6 @@ define(["jquery","ckeditor","template","nprogress","region","datepiker","datepic
    		}
    	})
 
-
    	// 点击保存 触发button事件 自动将form表单中的vlaue属性值提交 需要用到form插件
    	$(".settings").on("submit","form",function(){
    		$(this).ajaxSubmit({
@@ -77,11 +76,27 @@ define(["jquery","ckeditor","template","nprogress","region","datepiker","datepic
    			type : 'post',
    			success : function(data) {
    				if (data.code == 200) {
-   					$("#avater img").attr("src",avaterImg);
-   					alert("个人资料修改成功!");
+   					// 获取 userinfo数据 修改
+					var userinfo = JSON.parse($.cookie("userInfo"));
+					// 判断有没有上传图片 有的话 进行下一步
+					if (avaterImg) {
+						userinfo.tc_avatar = avaterImg;
+						// 将cookie值转化成字符串
+						userinfo = JSON.stringify(userinfo);
+						// 先删除cookie 如果删除成功就进行下一步
+						if ($.removeCookie("userInfo",{path : "/"})) {
+							// 如果删除成功 就重新声明要给cookie 将修改后的值赋给 userinfo
+							$.cookie("userInfo",userinfo,{path : "/"});
+						}
+					}
+					// 修改成功后 刷新页面
+   					location.reload();
    				}
    			}
    		});
    		return false;
    	})
+
+
+   	
 })
