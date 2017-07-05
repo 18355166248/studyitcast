@@ -41,6 +41,7 @@ define(["jquery","template","util","nprogress","uploadify","jcrop"],function($,t
 						$(".preview>img").attr("src",data.result.path);
 						//判断 如果有jcrop插件 就移除插件
 						if(jcropApi) {
+							// console.log(jcropApi);  //可以看proto方法
 							jcropApi.destroy();
 							$("#cut-img").text("裁切图片");
 						}
